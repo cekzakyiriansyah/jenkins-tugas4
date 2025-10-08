@@ -7,20 +7,23 @@ pipeline {
     }
 
     options {
-        ansiColor('xterm')
         skipStagesAfterUnstable()
     }
 
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                ansiColor('xterm') {
+                    sh 'pip install -r requirements.txt'
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'pytest test_app.py || true'
+                ansiColor('xterm') {
+                    sh 'pytest test_app.py || true'
+                }
             }
         }
 
@@ -32,7 +35,9 @@ pipeline {
                 }
             }
             steps {
-                echo "Simulating deploy from branch ${env.BRANCH_NAME}"
+                ansiColor('xterm') {
+                    echo "Simulating deploy from branch ${env.BRANCH_NAME}"
+                }
             }
         }
     }
